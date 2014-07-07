@@ -2,12 +2,45 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <title>{% block title %}QCM{% endblock %}</title>
+ 
+        {# ... #}
+ 
+        {% block stylesheets %}
+        {% stylesheets
+            '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.css'
+            filter='cssrewrite'
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}  
+        {% endblock %}
+ 
+        {# ... #}
+ 
     </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+    <body> 
+        {% include "navbar.html.twig" %}
+     
+
+        {% block body %}
+        
+        
+        {% endblock %}
+
+ 
+        {% block javascripts %}
+        {% javascripts
+            '@TataiQcmBundle/Resources/public/js/*'
+            '../vendor/twbs/bootstrap/js/dropdown.js'
+        %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {% endblock %}
+ 
+        <script type="text/javascript">
+            $(document).ready(function() {
+                {% block document_ready %}{% endblock %}
+            });
+        </script>
     </body>
 </html>

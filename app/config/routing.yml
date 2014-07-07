@@ -1,0 +1,5 @@
+tatai_qcm:
+    resource: "@TataiQcmBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
