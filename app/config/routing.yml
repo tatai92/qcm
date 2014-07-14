@@ -1,3 +1,7 @@
+tatai_qcm_homepage:
+    path:     /
+    defaults: { _controller: TataiQcmBundle:Qcm:index}
+
 tatai_qcm:
     resource: "@TataiQcmBundle/Controller/"
     type:     annotation

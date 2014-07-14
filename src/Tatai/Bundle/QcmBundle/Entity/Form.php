@@ -42,7 +42,16 @@ class Form
      */
     private $enabled;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+       {
+           $this->creationDate     = new \Datetime;
+           $this->enabled  = true;
 
+
+       }
     /**
      * Get id
      *

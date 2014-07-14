@@ -1,0 +1,22 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div class="container"> 
+        <h2>Liste des formulaires</h2>
+
+        <div>
+            {% for form in forms %}
+                <div class="row">
+                    <div class="col-xs-2">
+                        {{ form.name }} 
+                    </div>
+                    <div class="col-xs-2">
+                        <a href="{{ path('tatai_qcm_form_edit', {'id': form.id}) }}" >
+                            <i class="icon-edit"></i>Modifier le formulaire
+                        </a>
+                   </div> 
+                </div>   
+            {% endfor %} 
+        </div>
+    </div>     
+ {% endblock %}
