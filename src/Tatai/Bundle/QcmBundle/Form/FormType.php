@@ -16,6 +16,13 @@ class FormType extends AbstractType
     {
         $builder
             ->add('name')
+         /*   ->add('formKind', 'entity', array(
+                'label'    => 'Type',
+                'class'    => 'TataiQcmBundle:FormKind',
+                'property' => 'name',
+                'multiple' => false,
+                'empty_value' => "choisissez un type")
+            )*/
             ->add('enabled', 'checkbox', array(
                 'label'     => 'Afficher publiquement ?',
                 'required'  => false,

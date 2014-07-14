@@ -38,6 +38,8 @@ class QcmController extends Controller
                 $em = $this->get('doctrine')->getManager();
                 $em->persist($qcm_form);
                 $em->flush();
+                 // On définit un message flash
+                $request->getSession()->getFlashBag()->add('success', 'L\'ajout du formulaire a bien été effectuée');
                 return $this->redirect($this->generateUrl('tatai_qcm_home'));
             }
 
@@ -67,6 +69,10 @@ class QcmController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($qcm_form);
                 $em->flush();
+                
+                // On définit un message flash
+                $request->getSession()->getFlashBag()->add('success', 'La modification du formulaire a bien été effectuée');
+                
                 return $this->redirect($this->generateUrl('tatai_qcm_home'));
             }
         }

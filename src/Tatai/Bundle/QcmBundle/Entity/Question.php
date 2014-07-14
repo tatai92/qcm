@@ -49,6 +49,11 @@ class Question
     private $form;
     
     /**
+     * @ORM\ManyToOne(targetEntity="Tatai\Bundle\QcmBundle\Entity\FormKind")
+     */
+    private $formKind;
+    
+    /**
      * Get id
      *
      * @return integer 
@@ -148,5 +153,28 @@ class Question
     public function getForm()
     {
         return $this->form;
+    }
+
+    /**
+     * Set formKind
+     *
+     * @param \Tatai\Bundle\QcmBundle\Entity\FormKind $formKind
+     * @return Question
+     */
+    public function setFormKind(\Tatai\Bundle\QcmBundle\Entity\FormKind $formKind = null)
+    {
+        $this->formKind = $formKind;
+
+        return $this;
+    }
+
+    /**
+     * Get formKind
+     *
+     * @return \Tatai\Bundle\QcmBundle\Entity\FormKind 
+     */
+    public function getFormKind()
+    {
+        return $this->formKind;
     }
 }

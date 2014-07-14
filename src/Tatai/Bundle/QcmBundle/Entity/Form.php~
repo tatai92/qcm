@@ -42,7 +42,10 @@ class Form
      */
     private $enabled;
 
-
+    /**
+     * @ORM\ManyToOne(targetEntity="Tatai\Bundle\QcmBundle\Entity\FormKind")
+     */
+    private $formKind;
     
     /**
      * Constructor
@@ -132,6 +135,4 @@ class Form
     {
         return $this->enabled;
     }
-
-
 }
