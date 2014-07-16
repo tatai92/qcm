@@ -43,9 +43,10 @@ class Form
     private $enabled;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tatai\Bundle\QcmBundle\Entity\FormKind")
+     * @ORM\OneToMany(targetEntity="Tatai\Bundle\QcmBundle\Entity\Question", mappedBy="form",cascade={"persist", "remove"})
      */
-    private $formKind;
+    private $questions;       
+    
     
     /**
      * Constructor
@@ -135,4 +136,6 @@ class Form
     {
         return $this->enabled;
     }
+
+
 }

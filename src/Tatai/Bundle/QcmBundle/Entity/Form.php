@@ -42,7 +42,11 @@ class Form
      */
     private $enabled;
 
-
+    /**
+     * @ORM\OneToMany(targetEntity="Tatai\Bundle\QcmBundle\Entity\Question", mappedBy="form",cascade={"persist", "remove"})
+     */
+    private $questions;       
+    
     
     /**
      * Constructor
@@ -51,6 +55,7 @@ class Form
        {
            $this->creationDate     = new \Datetime;
            $this->enabled  = true;
+           $this->questions = new \Doctrine\Common\Collections\ArrayCollection();
 
 
        }
@@ -134,4 +139,38 @@ class Form
     }
 
 
+
+    /**
+     * Add questions
+     *
+     * @param \Tatai\Bundle\QcmBundle\Entity\Question $questions
+     * @return Form
+     */
+    public function addQuestion(\Tatai\Bundle\QcmBundle\Entity\Question $questions)
+    {
+        $this->questions[] = $questions;
+        $questions->setForm($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove questions
+     *
+     * @param \Tatai\Bundle\QcmBundle\Entity\Question $questions
+     */
+    public function removeQuestion(\Tatai\Bundle\QcmBundle\Entity\Question $questions)
+    {
+        $this->questions->removeElement($questions);
+    }
+
+    /**
+     * Get questions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
 }

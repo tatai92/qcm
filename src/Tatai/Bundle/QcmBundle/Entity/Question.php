@@ -43,7 +43,7 @@ class Question
     private $enabled;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tatai\Bundle\QcmBundle\Entity\Form")
+     * @ORM\ManyToOne(targetEntity="Tatai\Bundle\QcmBundle\Entity\Form" , inversedBy="questions")
      * @ORM\JoinColumn(nullable=false)
      */
     private $form;

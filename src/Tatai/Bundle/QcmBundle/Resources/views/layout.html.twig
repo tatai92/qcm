@@ -19,19 +19,16 @@
  
     </head>
     <body> 
-        {% include "navbar.html.twig" %}
+        {% include "TataiQcmBundle::navbar.html.twig" %}
      
-
         {% block body %}
         
-        
         {% endblock %}
-
- 
+        
         {% block javascripts %}
         {% javascripts
             '@TataiQcmBundle/Resources/public/js/*'
-            '%kernel.root_dir%/../vendor/twbs/bootstrap/js/dropdown.js'
+            '../vendor/twbs/bootstrap/js/dropdown.js'
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}

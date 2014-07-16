@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class FormType extends AbstractType
+class QuestionType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -15,17 +15,16 @@ class FormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('enabled', 'checkbox', array(
-                'label'     => 'Afficher publiquement ?',
-                'required'  => false,
-            ))
-            ->add('questions', 'collection', array('type' => new QuestionType(),
-                                              'allow_add'    => true,
-                                              'allow_delete' => true))
-            ->add('save', 'submit', array(
-                'attr' => array('class' => 'btn btn-primary'),
-            ))
+            ->add('questionNumber')
+            ->add('questionLabel')
+            ->add('formKind', 'entity', array(
+                'label'    => 'Type',
+                'class'    => 'TataiQcmBundle:FormKind',
+                'property' => 'name',
+                'multiple' => false,
+                'empty_value' => "choisissez un type")
+            )
+            ->add('enabled')
         ;
     }
     
@@ -35,7 +34,7 @@ class FormType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tatai\Bundle\QcmBundle\Entity\Form'
+            'data_class' => 'Tatai\Bundle\QcmBundle\Entity\Question'
         ));
     }
 
@@ -44,6 +43,6 @@ class FormType extends AbstractType
      */
     public function getName()
     {
-        return 'tatai_qcmbundle_form';
+        return 'tatai_qcmbundle_question';
     }
 }
