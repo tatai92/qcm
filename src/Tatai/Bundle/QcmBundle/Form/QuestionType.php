@@ -24,7 +24,10 @@ class QuestionType extends AbstractType
                 'multiple' => false,
                 'empty_value' => "choisissez un type")
             )
-            ->add('enabled')
+            ->add('enabled', 'checkbox', array(
+                'label'     => 'Afficher ?',
+                'required'  => false,
+            ))
         ;
     }
     

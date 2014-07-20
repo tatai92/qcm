@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class Form
 {
@@ -43,7 +44,7 @@ class Form
     private $enabled;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tatai\Bundle\QcmBundle\Entity\Question", mappedBy="form",cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Tatai\Bundle\QcmBundle\Entity\Question", mappedBy="form",cascade={"all"})
      */
     private $questions;       
     
@@ -148,9 +149,10 @@ class Form
      */
     public function addQuestion(\Tatai\Bundle\QcmBundle\Entity\Question $questions)
     {
-        $this->questions[] = $questions;
-        $questions->setForm($this);
-
+        if (!$this->questions->contains($questions)) {
+            $this->questions[] = $questions;
+            $questions->setForm($this);
+        }
         return $this;
     }
 
@@ -161,6 +163,7 @@ class Form
      */
     public function removeQuestion(\Tatai\Bundle\QcmBundle\Entity\Question $questions)
     {
+        
         $this->questions->removeElement($questions);
     }
 
@@ -173,4 +176,8 @@ class Form
     {
         return $this->questions;
     }
+    
+    
+    
+    
 }

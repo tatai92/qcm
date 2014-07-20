@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Tatai\Bundle\QcmBundle\Entity\Form;
 use Tatai\Bundle\QcmBundle\Form\FormType;
 use Tatai\Bundle\QcmBundle\Form\FormEditType;
+use Doctrine\Common\Collections\ArrayCollection;
 class QcmController extends Controller
 {
     
@@ -42,8 +43,6 @@ class QcmController extends Controller
                 $request->getSession()->getFlashBag()->add('success', 'L\'ajout du formulaire a bien été effectuée');
                 return $this->redirect($this->generateUrl('tatai_qcm_home'));
             }
-
-        
         }
         return array(
             'form' => $form->createView(),
@@ -56,17 +55,28 @@ class QcmController extends Controller
      */
     public function formEditAction(Form $qcm_form,Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+        
         if ($qcm_form == null) {
             throw $this->createNotFoundException('Formulaire[id='.$qcm_form->getId().'] inexistant');
         }
-    
+        // liste des questions originales
+        $originalQuestions= new ArrayCollection();
+        foreach ($qcm_form->getQuestions() as $question) {
+            $originalQuestions->add($question);
+        }
         $form = $this->createForm(new FormEditType(), $qcm_form);
 
         if ($request->isMethod('POST')){
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
+                
+                foreach ($originalQuestions as $question) {
+                    if ($qcm_form->getQuestions()->contains($question) == false) {
+                        $em->remove($question);
+                    }
+                }
                 $em->persist($qcm_form);
                 $em->flush();
                 
