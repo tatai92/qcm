@@ -2,7 +2,7 @@
 
 namespace Tatai\Bundle\QcmBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM; 
 
 /**
  * Form

@@ -7,5 +7,6 @@
 /.svn
 /nbproject/*
 /nbproject/private/private.xml
+./idea/*
 /web/uploads/*
 

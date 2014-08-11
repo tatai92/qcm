@@ -1,11 +1,11 @@
 <?php
-namespace Sdz\Bundle\BlogBundle\DataFixtures\ORM;
+namespace Tatai\Bundle\QcmBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Tatai\Bundle\QcmBundle\Entity\FormKind;
 
-class Competences implements FixtureInterface
+class FormKinds implements FixtureInterface
 {
   public function load(ObjectManager $manager)
   {
